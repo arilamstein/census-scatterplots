@@ -1,5 +1,6 @@
 library(shiny)
 library(choroplethr)
+library(ggvis)
 
 data(df_state_demographics)
 
@@ -23,8 +24,8 @@ shinyUI(fluidPage(
     ),
 
     mainPanel(
-      plotOutput("state"),
-      plotOutput("county"),
+      ggvisOutput("state"),
+      ggvisOutput("county"),
       plotOutput("zip")
     )
   )

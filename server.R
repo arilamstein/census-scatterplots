@@ -10,22 +10,28 @@ data(df_zip_demographics)
 
 shinyServer(function(input, output) {
 
-  output$state = renderPlot({
-    ggplot(df_state_demographics, aes_string(input$x, input$y)) +
-      geom_point() +
-      geom_smooth(method="lm")  
+  output$state = reactive({
+    df_state_demographics %>%
+      ggvis(prop("x", as.name(input$x)), prop("y", as.name(input$y))) %>%
+      layer_points() %>%
+      bind_shiny("state")
   })
-  output$county = renderPlot({
-    ggplot(df_county_demographics, aes_string(input$x, input$y)) +
-      geom_point() +
-      geom_smooth(method="lm")  
-  })
-  output$zip = renderPlot({
-    ggplot(df_zip_demographics, aes_string(input$x, input$y)) +
-      geom_point() +
-      geom_smooth(method="lm")  
+
+  output$county = reactive({
+    df_county_demographics %>%
+      ggvis(prop("x", as.name(input$x)), prop("y", as.name(input$y)), opacity := 0.25) %>%
+      layer_points() %>%
+      layer_model_predictions(model='lm', se=TRUE) %>%
+      bind_shiny("county")
   })
   
-
+  output$zip = renderPlot({
+    df_zip_demographics %>%
+      ggvis(prop("x", as.name(input$x)), prop("y", as.name(input$y)), opacity := 0.1) %>%
+      layer_points() %>%
+      layer_model_predictions(model='lm', se=TRUE) %>%
+      bind_shiny("zip")
+  })
+  
 })
 
