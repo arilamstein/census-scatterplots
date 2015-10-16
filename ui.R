@@ -13,14 +13,11 @@ shinyUI(fluidPage(
       selectInput("x",
                   "x",
                   choices = colnames(df_state_demographics),
-                  selected = "percent_black"),
+                  selected = "percent_white"),
       selectInput("y",
                   "y",
                   choices = colnames(df_state_demographics),
-                  selected = "per_capita_income"),
-      checkboxInput("line", 
-                    "line", 
-                    value = TRUE)
+                  selected = "median_age"),
     ),
 
     mainPanel(

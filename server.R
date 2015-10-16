@@ -14,22 +14,23 @@ shinyServer(function(input, output) {
     df_state_demographics %>%
       ggvis(prop("x", as.name(input$x)), prop("y", as.name(input$y))) %>%
       layer_points() %>%
+      layer_model_predictions(model='lm', se=TRUE, stroke:="blue") %>%
       bind_shiny("state")
   })
 
   output$county = reactive({
     df_county_demographics %>%
-      ggvis(prop("x", as.name(input$x)), prop("y", as.name(input$y)), opacity := 0.25) %>%
-      layer_points() %>%
-      layer_model_predictions(model='lm', se=TRUE) %>%
+      ggvis(prop("x", as.name(input$x)), prop("y", as.name(input$y))) %>%
+      layer_points(opacity := 0.25) %>%
+      layer_model_predictions(model='lm', se=TRUE, stroke:="blue") %>%
       bind_shiny("county")
   })
   
   output$zip = renderPlot({
     df_zip_demographics %>%
-      ggvis(prop("x", as.name(input$x)), prop("y", as.name(input$y)), opacity := 0.1) %>%
-      layer_points() %>%
-      layer_model_predictions(model='lm', se=TRUE) %>%
+      ggvis(prop("x", as.name(input$x)), prop("y", as.name(input$y))) %>%
+      layer_points(opacity := 0.1) %>%
+      layer_model_predictions(model='lm', se=TRUE, stroke:="blue") %>%
       bind_shiny("zip")
   })
   
