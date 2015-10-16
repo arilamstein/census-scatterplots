@@ -13,17 +13,17 @@ shinyUI(fluidPage(
       selectInput("x",
                   "x",
                   choices = colnames(df_state_demographics),
-                  selected = "percent_white"),
+                  selected = "median_age"),
       selectInput("y",
                   "y",
                   choices = colnames(df_state_demographics),
-                  selected = "median_age"),
+                  selected = "per_capita_income")
     ),
 
     mainPanel(
       ggvisOutput("state"),
       ggvisOutput("county"),
-      plotOutput("zip")
+      ggvisOutput("zip")
     )
   )
 ))
