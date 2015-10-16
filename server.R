@@ -11,7 +11,7 @@ data(df_zip_demographics)
 
 state_tooltip = function(x) 
 {
-  if (!is.null(x))
+  if (!is.null(x) && "region" %in% colnames(x))
   {
     x$region
   }
@@ -19,7 +19,7 @@ state_tooltip = function(x)
 
 county_tooltip = function(x) 
 {
-  if (!is.null(x))
+  if (!is.null(x) && "region" %in% colnames(x))
   {
     data(county.regions)
     county.name  = county.regions[county.regions$region == x$region, "county.name"]
@@ -30,7 +30,7 @@ county_tooltip = function(x)
 
 zip_tooltip = function(x)
 {
-  if (!is.null(x))
+  if (!is.null(x) && "region" %in% colnames(x))
   {
     data(zip.regions)
     county.name = zip.regions[zip.regions$region == x$region, "county.name"]
@@ -43,25 +43,28 @@ shinyServer(function(input, output) {
 
   output$state = reactive({
     df_state_demographics %>%
-      ggvis(x = as.name(input$x), y = as.name(input$y), key := ~region) %>%
-      layer_points() %>%
+      ggvis(x = as.name(input$x), y = as.name(input$y)) %>%
+      layer_points(key := ~region) %>%
       add_tooltip(state_tooltip, "hover") %>%
+      layer_model_predictions(model="lm", stroke:="blue") %>%
       bind_shiny("state")
   })
 
   output$county = reactive({
     df_county_demographics %>%
-      ggvis(x = as.name(input$x), y = as.name(input$y), key := ~region) %>%
-      layer_points(opacity := 0.25) %>%
+      ggvis(x = as.name(input$x), y = as.name(input$y)) %>%
+      layer_points(key := ~region, opacity := 0.25) %>%
       add_tooltip(county_tooltip, "hover") %>%
+      layer_model_predictions(model='lm', stroke:="blue") %>%
       bind_shiny("county")
   })
 
   output$zip = reactive({
     df_zip_demographics %>%
-      ggvis(x = as.name(input$x), y = as.name(input$y), key := ~region) %>%
-      layer_points(opacity := 0.1) %>%
+      ggvis(x = as.name(input$x), y = as.name(input$y)) %>%
+      layer_points(key := ~region, opacity := 0.1) %>%
       add_tooltip(zip_tooltip, "hover") %>%
+      layer_model_predictions(model='lm', stroke:="blue") %>%
       bind_shiny("zip")
   })
 

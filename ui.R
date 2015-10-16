@@ -21,8 +21,11 @@ shinyUI(fluidPage(
     ),
 
     mainPanel(
+      div(HTML("<h2><center>States</center></h2>")),
       ggvisOutput("state"),
+      div(HTML("<h2><center>Counties</center></h2>")),
       ggvisOutput("county"),
+      div(HTML("<h2><center>ZIP Codes</center></h2>")),
       ggvisOutput("zip")
     )
   )
