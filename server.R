@@ -1,5 +1,4 @@
 library(shiny)
-library(ggplot2)
 library(ggvis)
 library(choroplethr)
 library(choroplethrMaps)
@@ -68,6 +67,7 @@ shinyServer(function(input, output) {
       add_tooltip(zip_tooltip, "hover") %>%
       layer_model_predictions(model='lm', stroke:="blue") %>%
       add_axis("y", title = input$y, title_offset = 60) %>%
+      set_options(renderer = "canvas") %>%
       bind_shiny("zip")
   })
 

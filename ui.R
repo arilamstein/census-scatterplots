@@ -9,8 +9,8 @@ shinyUI(fluidPage(
 
   titlePanel("Interactive Scatterplots of 2013 Census Data"),
   
-  div(HTML("By <a href='http://www.arilamstein.com'>Ari Lamstein</a>. Blog Post <a href='http://www.arilamstein.com/blog/2015/10/16/census-scatterplots-using-ggvis/'>here</a>.")),
-  div(HTML("Want to analyze data like this? <a href='http://www.arilamstein.com/free-course'>Learn to Map Census Data in R</a>.")),
+  div(HTML("By <a href='http://www.arilamstein.com'>Ari Lamstein</a>. Blog Post <a href='http://www.arilamstein.com/blog/2015/10/17/interactive-scatterplots-of-census-data-using-ggvis/'>here</a>.")),
+  div(HTML("Want to analyze data like this? Take my free course <a href='http://www.arilamstein.com/free-course'>Learn to Map Census Data in R</a>.")),
 
   sidebarLayout(
     sidebarPanel(
