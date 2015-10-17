@@ -47,6 +47,7 @@ shinyServer(function(input, output) {
       layer_points(key := ~region) %>%
       add_tooltip(state_tooltip, "hover") %>%
       layer_model_predictions(model="lm", stroke:="blue") %>%
+      add_axis("y", title = input$y, title_offset = 60) %>%
       bind_shiny("state")
   })
 
@@ -56,6 +57,7 @@ shinyServer(function(input, output) {
       layer_points(key := ~region, opacity := 0.25) %>%
       add_tooltip(county_tooltip, "hover") %>%
       layer_model_predictions(model='lm', stroke:="blue") %>%
+      add_axis("y", title = input$y, title_offset = 60) %>%
       bind_shiny("county")
   })
 
@@ -65,6 +67,7 @@ shinyServer(function(input, output) {
       layer_points(key := ~region, opacity := 0.1) %>%
       add_tooltip(zip_tooltip, "hover") %>%
       layer_model_predictions(model='lm', stroke:="blue") %>%
+      add_axis("y", title = input$y, title_offset = 60) %>%
       bind_shiny("zip")
   })
 
