@@ -3,21 +3,25 @@ library(choroplethr)
 library(ggvis)
 
 data(df_state_demographics)
+choices = colnames(df_state_demographics)[2:ncol(df_state_demographics)]
 
 shinyUI(fluidPage(
 
-  titlePanel("2013 Census Scatterplots"),
+  titlePanel("Interactive Scatterplots of 2013 Census Data"),
+  
+  div(HTML("By <a href='http://www.arilamstein.com'>Ari Lamstein</a>. Blog Post <a href='http://www.arilamstein.com/blog/2015/10/16/census-scatterplots-using-ggvis/'>here</a>.")),
+  div(HTML("Want to analyze data like this? <a href='http://www.arilamstein.com/free-course'>Learn to Map Census Data in R</a>.")),
 
   sidebarLayout(
     sidebarPanel(
       selectInput("x",
                   "x",
-                  choices = colnames(df_state_demographics),
-                  selected = "median_age"),
+                  choices  = choices,
+                  selected = "percent_white"),
       selectInput("y",
                   "y",
-                  choices = colnames(df_state_demographics),
-                  selected = "per_capita_income")
+                  choices  = choices,
+                  selected = "median_age")
     ),
 
     mainPanel(
